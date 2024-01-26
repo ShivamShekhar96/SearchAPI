@@ -1,22 +1,19 @@
 import NodeCache from "node-cache";
 
-let appCache = null
-
+let appCache = null;
 
 const createCache = () => {
-    if (appCache) {
-        alert("Cache already exists");
-        return;
-    }
-    appCache = new NodeCache()
-    return appCache
-
-}
+  if (appCache) {
+    alert("Cache already exists");
+    return;
+  }
+  appCache = new NodeCache();
+  return appCache;
+};
 export const getCache = () => {
-    if (!appCache)
-        appCache = createCache()
+  if (!appCache) appCache = createCache();
 
-    return appCache
-}
+  return appCache;
+};
 
-export default getCache
+export default getCache;
