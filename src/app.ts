@@ -3,6 +3,7 @@ import cors from "cors";
 import * as bodyParser from "body-parser";
 import routesV1 from "./routes/routes.v1";
 import getPool from "./db";
+import getCache from "appCache";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(routesV1);
 const port = process.env.PORT || 4000;
 
 const db = getPool();
+const cache = getCache();
 
 app.get("/", (req, res) => {
   res.send("Successful response.");

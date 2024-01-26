@@ -1,4 +1,4 @@
-import { createUser, getUser } from "../controllers/user.controller";
+import { createUser, getUser, logoutUser } from "../controllers/user.controller";
 import { Request, Router, Response, NextFunction } from "express";
 
 const router = Router();
@@ -29,6 +29,39 @@ router.post(
                 phone: req.body.phone,
             };
             const profile = await createUser(payload);
+            res.json({ profile });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+router.post(
+    "/users/login",
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const auth_key = req.headers['X-Auth-Key'] as string
+            const payload = {
+                email: req.body.email,
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                phone: req.body.phone,
+                auth_key
+            };
+            const profile = await createUser(payload);
+            res.json({ profile });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+router.post(
+    "/users/logout",
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const auth_key = req.headers['X-Auth-Key'] as string
+            const profile = await logoutUser(auth_key);
             res.json({ profile });
         } catch (error) {
             next(error);
