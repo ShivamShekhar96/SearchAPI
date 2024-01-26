@@ -1,5 +1,5 @@
 export interface GetUserSearches {
-    user_id: number
+    user_id?: number
 }
 
 export interface CreateSearches {
