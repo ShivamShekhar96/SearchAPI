@@ -1,10 +1,10 @@
 export interface GetUser {
-    email: string
+  email: string;
 }
 
 export interface CreateUser {
-    email: string;
-    first_name?: string;
-    last_name?: string;
-    phone?: string
+  email: string;
+  first_name?: string;
+  last_name?: string;
+  phone?: string;
 }
