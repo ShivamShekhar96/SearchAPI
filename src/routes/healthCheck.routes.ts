@@ -6,7 +6,7 @@ router.get(
   "/health/ping",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      res.status(200).json("Success.");
+      res.status(200).json("App running");
     } catch (error) {
       next(error);
     }
