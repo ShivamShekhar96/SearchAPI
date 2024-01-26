@@ -3,7 +3,7 @@ import cors from "cors";
 import * as bodyParser from "body-parser";
 import routesV1 from "./routes/routes.v1";
 import getPool from "./db";
-import getCache from "appCache";
+import getCache from "./appCache";
 
 const app = express();
 

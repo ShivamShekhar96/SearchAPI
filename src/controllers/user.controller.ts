@@ -1,4 +1,4 @@
-import getCache from "appCache";
+import getCache from "../appCache";
 import getPool from "../db";
 import { GetUser, CreateUser } from "../interface/user.interface";
 
