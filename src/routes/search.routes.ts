@@ -1,4 +1,4 @@
-import { createSearches, getUserSearches } from "controllers/search.controller";
+import { createSearches, getUserSearches } from "../controllers/search.controller";
 import { Request, Router, Response, NextFunction } from "express";
 
 const router = Router();
