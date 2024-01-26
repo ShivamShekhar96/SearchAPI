@@ -21,9 +21,10 @@ router.post(
     "/searches/",
     async (req: Request, res: Response, next: NextFunction) => {
         try {
+            const urlParts = req.body.url.split('?')
             const payload = {
-                url: req.body.url as string,
-                description: req.body.description as string,
+                url: urlParts[0],
+                description: req.body.description,
                 user_id: parseInt(req.body.user_id),
             };
             const data = await createSearches(payload);
