@@ -1,7 +1,7 @@
 import getPool from "../db";
 import {
-    GetUser,
-    CreateUser
+  GetUser,
+  CreateUser
 } from "../interface/user.interface";
 
 const db = getPool();
@@ -13,12 +13,11 @@ export const getUser = async (params: GetUser) => {
   return results.rows[0];
 };
 
-export const createUser = (params: CreateUser) => {
-    const result = db.query(
-      "INSERT INTO public.users (email, first_name, last_name, phone) VALUES ($1, $2, $3, $4) RETURNING id",
-      [params.email, params.first_name, params.last_name, params.phone]
-    );
-  
-    return result.rows[0].id;
-  };
+export const createUser = async (params: CreateUser) => {
+  const result = await db.query(
+    "INSERT INTO public.users (email, first_name, last_name, phone) VALUES ($1, $2, $3, $4) RETURNING id",
+    [params.email, params.first_name, params.last_name, params.phone]
+  );
+  return result.rows[0].id;
+};
 

@@ -8,4 +8,5 @@ const api = Router()
   .use(healthCheckRoutes)
   .use(serchRoutes);
 
+// TODO: add security credentials 
 export default Router().use("/api/v1/", api);
