@@ -17,10 +17,10 @@ export const getUserSearches = async (
   return results.rows;
 };
 
-const checkExistingSearch = async (url: string) => {
+const checkExistingSearch = async (url: string, user_id: number) => {
   const result = await db.query(
-    "SELECT id FROM public.searches WHERE url ILIKE $1",
-    [url]
+    "SELECT id FROM public.searches WHERE url ILIKE $1 AND user_id = $2",
+    [url, user_id]
   );
 
   return result.rows[0];
@@ -33,7 +33,7 @@ export const createSearches = async (
   const user_id = cache.get(params.auth_key);
   if (!user_id) return "User not authorized";
 
-  const existingSearch = await checkExistingSearch(params.url);
+  const existingSearch = await checkExistingSearch(params.url, user_id);
   if (existingSearch)
     return `Search already exists with search id ${existingSearch.id}`;
   const { url, description } = params;

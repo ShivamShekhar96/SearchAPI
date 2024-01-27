@@ -25,10 +25,10 @@ router.post(
   "/searches/",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const url = new URL(req.body.url);
       const auth_key = req.headers["x-auth-key"] as string;
-      const urlParts = req.body.url.split("?");
       const payload = {
-        url: urlParts[0],
+        url: url.origin,
         description: req.body.description,
         user_id: parseInt(req.body.user_id),
         auth_key,
