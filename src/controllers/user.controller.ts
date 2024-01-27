@@ -30,10 +30,11 @@ export const loginUser = async (params: CreateUser & { auth_key: string }) => {
     user_id = user.id;
   }
   cache.set(params.auth_key, user_id, 7776000);
+  console.log(params.auth_key, cache.get(params.auth_key))
 };
 
 export const logoutUser = async (auth_key: string) => {
-  cache.delete(auth_key);
+  cache.del(auth_key);
 };
 
 export const createUser = async (params: CreateUser) => {

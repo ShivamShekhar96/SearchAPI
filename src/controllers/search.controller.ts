@@ -7,7 +7,7 @@ const cache = getCache();
 
 // TODO: add pagination
 export const getUserSearches = async (
-  params: GetUserSearches & { auth_key: string }
+  params: GetUserSearches & { auth_key?: string }
 ) => {
   const user_id = cache.get(params.auth_key);
   if (!user_id) return [];

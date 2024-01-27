@@ -1,6 +1,7 @@
 import {
   createUser,
   getUser,
+  loginUser,
   logoutUser,
 } from "../controllers/user.controller";
 import { Request, Router, Response, NextFunction } from "express";
@@ -44,7 +45,7 @@ router.post(
   "/users/login",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const auth_key = req.headers["X-Auth-Key"] as string;
+      const auth_key = req.headers["x-auth-key"] as string;
       const payload = {
         email: req.body.email,
         first_name: req.body.first_name,
@@ -52,7 +53,7 @@ router.post(
         phone: req.body.phone,
         auth_key,
       };
-      const profile = await createUser(payload);
+      const profile = await loginUser(payload);
       res.json({ profile });
     } catch (error) {
       next(error);
@@ -64,9 +65,9 @@ router.post(
   "/users/logout",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const auth_key = req.headers["X-Auth-Key"] as string;
-      const profile = await logoutUser(auth_key);
-      res.json({ profile });
+      const auth_key = req.headers["x-auth-key"] as string;
+      await logoutUser(auth_key);
+      res.json("Success");
     } catch (error) {
       next(error);
     }
