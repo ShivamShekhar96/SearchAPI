@@ -14,7 +14,6 @@ const createPool = () => {
     database: process.env.DB_NAME || "my_project_db_6y9t",
     password: process.env.DB_PASSWORD || "Yo135ONQrPKPSMZYZP4xjIS2XFRnI8r3",
     port: 5432,
-    ssl: true,
   });
   return pool;
 };
