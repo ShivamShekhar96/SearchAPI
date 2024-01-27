@@ -19,10 +19,8 @@ export const getUserSearches = async (
 
 const checkExistingSearch = async (url: string, user_id: number) => {
   const result = await db.query(
-    "SELECT id FROM public.searches WHERE url ILIKE $1 AND user_id = $2",
-    [url, user_id]
+    `SELECT id FROM public.searches WHERE url LIKE '%${url}%' AND user_id = ${user_id}`
   );
-
   return result.rows[0];
 };
 
