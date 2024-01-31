@@ -1,10 +1,26 @@
 import {
   createSearches,
   getUserSearches,
+  getUserSearchByQuery,
 } from "../controllers/search.controller";
 import { Request, Router, Response, NextFunction } from "express";
 
 const router = Router();
+
+router.get(
+  "/search/",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const auth_key = req.headers["x-auth-key"] as string;
+      const query = req.query.query as string;
+      const data = await getUserSearchByQuery({ auth_key, query });
+
+      res.status(200).json({ data });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 router.get(
   "/searches/",

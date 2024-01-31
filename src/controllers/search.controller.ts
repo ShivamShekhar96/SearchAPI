@@ -5,10 +5,20 @@ import { CreateSearches, GetUserSearches } from "../interface/search.interface";
 const db = getPool();
 const cache = getCache();
 
+export const getUserSearchByQuery = async (params: {
+  auth_key: string;
+  query: string;
+}) => {
+  const user_id = cache.get(params.auth_key);
+
+  if (!user_id) return [];
+  let db_query =
+    `SELECT url, description FROM public.searches WHERE user_id = $1 AND url LIKE '%${params.query}%'`;
+  const results = await db.query(db_query, [user_id]);
+  return results.rows[0];
+};
 // TODO: add pagination
-export const getUserSearches = async (
-  params: GetUserSearches & { auth_key?: string }
-) => {
+export const getUserSearches = async (params: { auth_key: string }) => {
   const user_id = cache.get(params.auth_key);
   if (!user_id) return [];
   let query =
