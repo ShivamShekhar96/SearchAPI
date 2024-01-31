@@ -15,7 +15,7 @@ export const getUserSearchByQuery = async (params: {
   let db_query =
     `SELECT url, description FROM public.searches WHERE user_id = $1 AND url LIKE '%${params.query}%'`;
   const results = await db.query(db_query, [user_id]);
-  return results.rows[0];
+  return results.rows;
 };
 // TODO: add pagination
 export const getUserSearches = async (params: { auth_key: string }) => {
